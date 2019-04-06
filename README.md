@@ -38,7 +38,7 @@ cargo run
 
 ## Resources
 
-- [BGB Pan Docs](https://bgb.bircd.org/pandocs.htm)
+- [BGB Pan Docs](http://bgb.bircd.org/pandocs.htm)
 - [Tutorial to write a Game Boy emulator in Rust](https://github.com/rylev/DMG-01) by [@rylev](https://github.com/rylev/)
 - [Game Boy emulation in Javascript](http://imrannazar.com/gameboy-Emulation-in-JavaScript)
 - [Game Boy instruction set](http://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
