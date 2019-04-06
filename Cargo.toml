@@ -1,0 +1,5 @@
+[package]
+name = "gebers"
+version = "0.1.0"
+authors = ["David Ortiz <z.david.ortiz@gmail.com>"]
+edition = "2018"
