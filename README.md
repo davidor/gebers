@@ -44,3 +44,8 @@ cargo run
 - [Game Boy instruction set](http://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
 - [Blargg's test ROMs](http://gbdev.gg8.se/files/roms/blargg-gb-tests/)
 - [awesome-gbdev repo](https://github.com/gbdev/awesome-gbdev)
+
+
+## License
+
+[MIT License](http://opensource.org/licenses/MIT)
