@@ -64,6 +64,10 @@ impl<'memory> CPU<'memory> {
     }
 
     pub fn run_next_instruction(&mut self) {
+        if self.attend_pending_interrupt() {
+            return;
+        }
+
         let mut instruction_byte = self.fetch_byte();
 
         let prefixed = instruction_byte == instructions::PREFIX_INSTR_CODE;
@@ -246,5 +250,23 @@ impl<'memory> CPU<'memory> {
     fn value_in_addr(&self, register: &Register16bits) -> u8 {
         let register_val = self.registers.read_16b(register);
         self.memory.read_byte(register_val)
+    }
+
+    fn attend_pending_interrupt(&mut self) -> bool {
+        if self.interrupts_enabled {
+            let isr_addr = self.memory.interrupts.isr_of_first_pending();
+
+            match isr_addr {
+                Some(addr) => {
+                    self.interrupts_enabled = false;
+                    self.push_to_stack(self.registers.pc());
+                    self.registers.write_pc(addr);
+                    return true;
+                }
+                None => return false,
+            }
+        }
+
+        false
     }
 }

@@ -11,7 +11,7 @@ For now, the emulator only implements the CPU and a very simplified version of
 the memory. Sound, video, and support for the controls are not emulated yet.
 
 The emulator passes 10 out of the 11 tests of [Blargg's CPU test ROMs](http://gbdev.gg8.se/files/roms/blargg-gb-tests/).
-The one that tests interrupts fails because those have not been implemented yet.
+The one that tests interrupts fails because the timer has not been implemented yet.
 
 
 ## Test
