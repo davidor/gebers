@@ -1,3 +1,5 @@
+use crate::gpu::GPU;
+use crate::gpu::{VRAM_BEGIN, VRAM_END};
 use crate::interrupts::Interrupts;
 use crate::interrupts::{ENABLED_INTERRUPTS_ADDR, PENDING_INTERRUPTS_ADDR};
 
@@ -11,6 +13,7 @@ const MEMORY_SIZE: usize = 65_536;
 pub struct Memory {
     mem: [u8; MEMORY_SIZE],
     pub interrupts: Interrupts,
+    gpu: GPU,
 }
 
 impl Memory {
@@ -18,7 +21,12 @@ impl Memory {
         Memory {
             mem: [0; MEMORY_SIZE],
             interrupts: Interrupts::new(),
+            gpu: GPU::new(),
         }
+    }
+
+    pub fn gpu(&self) -> &GPU {
+        &self.gpu
     }
 
     pub fn read_byte(&self, address: u16) -> u8 {
@@ -38,6 +46,8 @@ impl Memory {
             self.interrupts.add_interrupts(value);
         } else if address == ENABLED_INTERRUPTS_ADDR as u16 {
             self.interrupts.enable_or_disable_interrupts(value);
+        } else if address >= (VRAM_BEGIN as u16) && address <= (VRAM_END as u16) {
+            self.gpu.write_vram((address as usize) - VRAM_BEGIN, value)
         } else if address == SERIAL_TRANSFER_CONTROL as u16 {
             // Blargg's test roms sent everything that is printed on the screen
             // to the game link port. That allows us to see the result of the

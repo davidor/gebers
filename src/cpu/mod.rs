@@ -63,6 +63,10 @@ impl<'memory> CPU<'memory> {
         }
     }
 
+    pub fn memory(&self) -> &Memory {
+        self.memory
+    }
+
     pub fn run_next_instruction(&mut self) {
         if self.attend_pending_interrupt() {
             return;
